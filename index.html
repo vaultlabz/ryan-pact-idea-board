@@ -33,6 +33,10 @@ h2.section{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.
 .top-card{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:18px;backdrop-filter:blur(10px);
 box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 14px 34px rgba(0,0,0,.42)}
 .top-card.center{border-color:rgba(223,166,62,.45);box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 0 0 1px rgba(223,166,62,.18),0 20px 44px rgba(0,0,0,.5)}
+.top-card{cursor:pointer;transition:border-color .15s}
+.top-card:hover{border-color:rgba(223,166,62,.55)}
+.jump-hint{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.18em;color:var(--muted);margin-top:13px}
+.jump-hint::first-letter{color:var(--gold2)}
 .group-panel{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px 16px;margin:0 0 14px;
 box-shadow:inset 0 1px 0 rgba(255,255,255,.04)}
 .group-label{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.2em;color:var(--muted);text-transform:uppercase;
@@ -123,16 +127,16 @@ box-shadow:inset 0 1px 0 rgba(255,255,255,.04);backdrop-filter:blur(10px)}
 </header>
 
 <h2 class="section">Top 3</h2>
-<div class="top3"><div class="top-card"><div class="card-head"><span class="rank-badge">#2</span></div>
+<div class="top3"><div class="top-card" data-jump="#card-2"><div class="card-head"><span class="rank-badge">#2</span></div>
 <div class="aurora-bar"></div>
 <h3 class="title title-gradient sm">Drive-By Notebook</h3><p class="tagline sm">The driving-for-dollars notebook</p>
-<div class="chip-row"><span class="chip price">$1.99 one-time</span><span class="chip verdict">GAP VERIFIED</span></div></div><div class="top-card center"><div class="card-head"><span class="rank-badge">#1 👑</span></div>
+<div class="chip-row"><span class="chip price">$1.99 one-time</span><span class="chip verdict">GAP VERIFIED</span></div><div class="jump-hint">FULL CARD ↓</div></div><div class="top-card center" data-jump="#card-1"><div class="card-head"><span class="rank-badge">#1 👑</span></div>
 <div class="aurora-bar"></div>
 <h3 class="title aurora-title sm">Lantern</h3><p class="tagline sm">A home for your AI</p>
-<div class="chip-row"><span class="chip price">99¢ looks / holiday bundles</span><span class="chip verdict">OPEN LANE</span></div></div><div class="top-card"><div class="card-head"><span class="rank-badge">#3</span></div>
+<div class="chip-row"><span class="chip price">99¢ looks / holiday bundles</span><span class="chip verdict">OPEN LANE</span></div><div class="jump-hint">FULL CARD ↓</div></div><div class="top-card" data-jump="#card-3"><div class="card-head"><span class="rank-badge">#3</span></div>
 <div class="aurora-bar"></div>
 <h3 class="title title-gradient sm">Pet Recovery Companion</h3><p class="tagline sm">The week after surgery</p>
-<div class="chip-row"><span class="chip price">$1.99 one-time</span><span class="chip verdict">OPEN LANE</span></div></div></div>
+<div class="chip-row"><span class="chip price">$1.99 one-time</span><span class="chip verdict">OPEN LANE</span></div><div class="jump-hint">FULL CARD ↓</div></div></div>
 
 <h2 class="section" id="ladderHead">The Ladder — all 18 at a glance</h2>
 <div class="ladder" id="ladder"><a class="ladder-row" href="#card-1" data-verdict="open_lane" data-band="in"><span class="l-rank">#1</span><span class="dot ivory"></span><span class="l-title">Lantern</span><span class="l-price">99¢ looks / holiday bundles</span><span class="l-chev">›</span></a>
@@ -595,6 +599,26 @@ document.querySelectorAll('.ladder-row').forEach(function(row){
     target.scrollIntoView({behavior:'smooth',block:'center'});
     target.classList.remove('flash'); void target.offsetWidth; target.classList.add('flash');
   });
+});
+function jumpToCard(sel){
+  var target=document.querySelector(sel);
+  if(!target) return;
+  if(document.getElementById('rankedList').classList.contains('hidden')){
+    document.querySelector('#viewSeg button[data-view="ranked"]').click();
+  }
+  if(target.offsetParent===null){
+    curV='all'; curB='all';
+    document.querySelectorAll('#verdictSeg button').forEach(function(x){x.classList.toggle('sel',x.getAttribute('data-v')==='all')});
+    document.querySelectorAll('#bandSeg button').forEach(function(x){x.classList.toggle('sel',x.getAttribute('data-b')==='all')});
+    applyFilters();
+  }
+  setTimeout(function(){
+    target.scrollIntoView({behavior:'smooth',block:'center'});
+    target.classList.remove('flash'); void target.offsetWidth; target.classList.add('flash');
+  },60);
+}
+document.querySelectorAll('.top-card').forEach(function(tc){
+  tc.addEventListener('click',function(){ jumpToCard(tc.getAttribute('data-jump')); });
 });
 segWire('verdictSeg','data-v',function(v){curV=v;applyFilters();});
 segWire('bandSeg','data-b',function(b){curB=b;applyFilters();});
