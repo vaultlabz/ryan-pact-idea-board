@@ -10,6 +10,10 @@
 
 **Live preview:** https://vaultlabz.github.io/ryan-pact-idea-board/
 
+![Ryan Pact Idea Board — header and Top 3](media/hero.jpg)
+
+Full-page screenshot: [media/full-page.jpg](media/full-page.jpg)
+
 **Branch policy:** work happens on the latest *-vN / project branch. List branches before editing. Never assume the GitHub default is the working line. Working line: main (GitHub default is main).
 
 ## What's inside
