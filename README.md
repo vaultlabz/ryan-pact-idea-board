@@ -14,7 +14,7 @@
 
 Full-page screenshot: [media/full-page.jpg](media/full-page.jpg)
 
-**Branch policy:** work happens on the latest *-vN / project branch. List branches before editing. Never assume the GitHub default is the working line. Working line: main (GitHub default is main).
+**Branch policy:** work happens on the latest *-vN / project branch. List branches before editing. Never assume the GitHub default is the working line. Working line: ryan-pact-idea-v2 (GitHub default is main). ryan-pact-idea-v1 is the frozen Nov 19 snapshot; main is the Pages serving line.
 
 ## What's inside
 
