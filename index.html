@@ -14,7 +14,7 @@ body{background:var(--bg);color:var(--ivory);font-family:Manrope,system-ui,sans-
 background:radial-gradient(720px 340px at 18% -60px,rgba(223,166,62,.14),transparent 65%),
 radial-gradient(640px 320px at 85% -40px,rgba(224,104,78,.08),transparent 65%),
 radial-gradient(900px 500px at 50% 115%,rgba(223,166,62,.05),transparent 70%)}
-.wrap{position:relative;z-index:1;max-width:880px;margin:0 auto;padding:34px 20px 70px}
+.wrap{position:relative;z-index:1;max-width:1240px;margin:0 auto;padding:34px 20px 70px}
 header.top{text-align:left;padding:10px 2px 22px}
 .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.22em;color:var(--gold);text-transform:uppercase}
 h1{font-size:clamp(34px,6vw,52px);font-weight:800;line-height:1.05;margin:10px 0 8px;
@@ -43,7 +43,7 @@ font-family:Manrope,sans-serif;font-weight:600;font-size:14.5px;padding:11px 14p
 .seg button.sel{background:rgba(223,166,62,.16);border-color:var(--gold);color:var(--gold2)}
 .seg button.sel::after{content:" ✓";color:var(--gold2)}
 .card{background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.014));border:1px solid var(--border);
-border-radius:var(--radius);padding:20px 22px 22px;margin:0 0 16px;position:relative;overflow:hidden;
+border-radius:var(--radius);padding:18px 19px 20px;margin:0;position:relative;overflow:hidden;
 box-shadow:inset 0 1px 0 rgba(255,255,255,.055),0 18px 40px rgba(0,0,0,.45)}
 .card::before{content:"";position:absolute;top:-70px;right:-40px;width:300px;height:190px;border-radius:50%;
 background:radial-gradient(closest-side,rgba(240,194,104,.10),transparent);pointer-events:none}
@@ -56,7 +56,7 @@ font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:13.5px;padding:5
 background:linear-gradient(90deg,var(--ivory),var(--gold) 45%,var(--red) 90%,transparent)}
 .aurora-bar.red{background:linear-gradient(90deg,var(--ivory),var(--red) 70%,transparent)}
 .aurora-bar.muted{opacity:.45}
-.title{font-size:clamp(23px,3.4vw,29px);font-weight:800;line-height:1.16}
+.title{font-size:clamp(20px,1.9vw,24px);font-weight:800;line-height:1.16}
 .title.sm{font-size:19px}
 .title-gradient{background:linear-gradient(95deg,var(--ivory) 5%,var(--gold2) 60%,var(--gold));
 -webkit-background-clip:text;background-clip:text;color:transparent}
@@ -90,7 +90,22 @@ font-family:Manrope,sans-serif;text-align:left;box-shadow:inset 0 1px 0 rgba(255
 footer{margin-top:36px;border-top:1px solid var(--border);padding-top:16px;color:var(--muted);font-size:13.5px;line-height:1.6}
 footer .mono{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.14em}
 .hidden{display:none}
-@media(max-width:640px){.stats{grid-template-columns:repeat(2,1fr)}.top3{grid-template-columns:1fr}.card{padding:17px 16px 19px}}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;align-items:start}
+.ladder{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:10px;margin:0 0 6px;
+box-shadow:inset 0 1px 0 rgba(255,255,255,.04);backdrop-filter:blur(10px)}
+.ladder-row{display:flex;align-items:center;gap:12px;padding:8px 10px;border-radius:10px;text-decoration:none;color:var(--ivory)}
+.ladder-row:hover{background:rgba(223,166,62,.08)}
+.l-rank{font-family:"IBM Plex Mono",monospace;font-weight:600;color:var(--gold2);font-size:13.5px;min-width:30px}
+.dot{width:9px;height:9px;border-radius:2.5px;flex:none}
+.dot.gold{background:var(--gold)}
+.dot.ivory{background:#cfc9ba}
+.dot.red{background:var(--red)}
+.l-title{font-weight:700;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.l-price{margin-left:auto;font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--muted);white-space:nowrap}
+@keyframes flash{0%{box-shadow:0 0 0 2px var(--gold),0 18px 40px rgba(0,0,0,.45)}100%{box-shadow:0 0 0 0 rgba(223,166,62,0),0 18px 40px rgba(0,0,0,.45)}}
+.card.flash{animation:flash 1.4s ease}
+@media(max-width:1024px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.stats{grid-template-columns:repeat(2,1fr)}.top3{grid-template-columns:1fr}.card{padding:17px 16px 19px}.grid{grid-template-columns:1fr}}
 </style></head><body>
 <div class="aurora-bg"></div>
 <div class="wrap">
@@ -118,6 +133,26 @@ footer .mono{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spaci
 <h3 class="title title-gradient sm">Pet Recovery Companion</h3><p class="tagline sm">The week after surgery</p>
 <div class="chip-row"><span class="chip price">$1.99 one-time</span><span class="chip verdict">OPEN LANE</span></div></div></div>
 
+<h2 class="section" id="ladderHead">The Ladder — all 18 at a glance</h2>
+<div class="ladder" id="ladder"><a class="ladder-row" href="#card-1" data-verdict="open_lane" data-band="in"><span class="l-rank">#1</span><span class="dot ivory"></span><span class="l-title">Lantern</span><span class="l-price">99¢ looks / holiday bundles</span></a>
+<a class="ladder-row" href="#card-2" data-verdict="gap_verified" data-band="in"><span class="l-rank">#2</span><span class="dot gold"></span><span class="l-title">Drive-By Notebook</span><span class="l-price">$1.99 one-time</span></a>
+<a class="ladder-row" href="#card-3" data-verdict="open_lane" data-band="in"><span class="l-rank">#3</span><span class="dot ivory"></span><span class="l-title">Pet Recovery Companion</span><span class="l-price">$1.99 one-time</span></a>
+<a class="ladder-row" href="#card-4" data-verdict="flooded" data-band="in"><span class="l-rank">#4</span><span class="dot red"></span><span class="l-title">19th Hole — Snap-the-Card Settler</span><span class="l-price">$1.99 one-time</span></a>
+<a class="ladder-row" href="#card-5" data-verdict="open_lane" data-band="in"><span class="l-rank">#5</span><span class="dot ivory"></span><span class="l-title">Who&#x27;s Got My Stuff</span><span class="l-price">$1.99 one-time</span></a>
+<a class="ladder-row" href="#card-6" data-verdict="flooded" data-band="in"><span class="l-rank">#6</span><span class="dot red"></span><span class="l-title">Friend Roulette</span><span class="l-price">$0.99–$1.99</span></a>
+<a class="ladder-row" href="#card-7" data-verdict="open_lane" data-band="in"><span class="l-rank">#7</span><span class="dot ivory"></span><span class="l-title">Missing Piece</span><span class="l-price">$0.99–$1.99</span></a>
+<a class="ladder-row" href="#card-8" data-verdict="open_lane" data-band="in"><span class="l-rank">#8</span><span class="dot ivory"></span><span class="l-title">Coin Coach</span><span class="l-price">$1.99 one-time</span></a>
+<a class="ladder-row" href="#card-9" data-verdict="open_lane" data-band="in"><span class="l-rank">#9</span><span class="dot ivory"></span><span class="l-title">Tutorializer</span><span class="l-price">$1.99 one-time</span></a>
+<a class="ladder-row" href="#card-10" data-verdict="open_lane" data-band="in"><span class="l-rank">#10</span><span class="dot ivory"></span><span class="l-title">Secret Trail</span><span class="l-price">$1.99 one-time</span></a>
+<a class="ladder-row" href="#card-11" data-verdict="open_lane" data-band="in"><span class="l-rank">#11</span><span class="dot ivory"></span><span class="l-title">Set List</span><span class="l-price">$1.99 one-time</span></a>
+<a class="ladder-row" href="#card-12" data-verdict="flooded" data-band="in"><span class="l-rank">#12</span><span class="dot red"></span><span class="l-title">Pet Derby</span><span class="l-price">$0.99–$1.99</span></a>
+<a class="ladder-row" href="#card-13" data-verdict="flooded" data-band="in"><span class="l-rank">#13</span><span class="dot red"></span><span class="l-title">Walkies Simulator</span><span class="l-price">$0.99</span></a>
+<a class="ladder-row" href="#card-14" data-verdict="open_lane" data-band="in"><span class="l-rank">#14</span><span class="dot ivory"></span><span class="l-title">Where&#x27;s My Pet?</span><span class="l-price">$1.99</span></a>
+<a class="ladder-row" href="#card-15" data-verdict="open_lane" data-band="in"><span class="l-rank">#15</span><span class="dot ivory"></span><span class="l-title">Next-Flick</span><span class="l-price">Free circle / $1.99 premium</span></a>
+<a class="ladder-row" href="#card-16" data-verdict="flooded" data-band="in"><span class="l-rank">#16</span><span class="dot red"></span><span class="l-title">Feisty Feline</span><span class="l-price">$0.99</span></a>
+<a class="ladder-row" href="#card-17" data-verdict="flooded" data-band="in"><span class="l-rank">#17</span><span class="dot red"></span><span class="l-title">Sample Clearance Log</span><span class="l-price">$1.99</span></a>
+<a class="ladder-row" href="#card-18" data-verdict="open_lane" data-band="in"><span class="l-rank">#18</span><span class="dot ivory"></span><span class="l-title">PRD Maker</span><span class="l-price">$1.99</span></a></div>
+
 <h2 class="section">The Board</h2>
 <div class="group-panel"><div class="group-label">View</div>
 <div class="seg" id="viewSeg">
@@ -141,7 +176,7 @@ footer .mono{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spaci
 </div></div>
 </div>
 
-<main id="rankedList"><article class="card lit first" data-verdict="open_lane" data-band="in">
+<main id="rankedList" class="grid"><article class="card lit first" id="card-1" data-verdict="open_lane" data-band="in">
 <div class="card-head"><span class="rank-badge">#1 👑</span></div>
 <div class="aurora-bar"></div>
 <h3 class="title aurora-title">Lantern</h3>
@@ -159,7 +194,7 @@ footer .mono{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spaci
 <span class="t-hint">Pitch · Competition</span><span class="chev">⌄</span></button>
 <div class="toggle-panel" id="panel-r1-pitch"><div class="panel-inner"><div class="group"><div class="group-label">THE PITCH</div><p>A house for your AI companion — a dressing room that grew into a whole home. A small brass lantern sits in every room, lit in whichever room the agent is in: the light&#x27;s on because someone lives there. House + wardrobe, a themes calendar, visits, notes, gifts, and secret rooms with earn-only hidden looks.</p></div><div class="group"><div class="group-label">MARKET CHECK</div><p>Jon&#x27;s pact submission #1. Look locked, rooms designed day and night, PRD written — sent to Ryan on Nov 19 with the logo and Living Room plates, with an invite for Ryan&#x27;s own Muse to review the PRD.</p></div><div class="group"><div class="group-label">NOTES</div><p>The big swing of the slate — a platform play, not a $1.99 one-off.</p></div></div></div></div>
 </article>
-<article class="card lit" data-verdict="gap_verified" data-band="in">
+<article class="card lit" id="card-2" data-verdict="gap_verified" data-band="in">
 <div class="card-head"><span class="rank-badge">#2</span></div>
 <div class="aurora-bar"></div>
 <h3 class="title title-gradient">Drive-By Notebook</h3>
@@ -177,7 +212,7 @@ footer .mono{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spaci
 <span class="t-hint">Pitch · Competition</span><span class="chev">⌄</span></button>
 <div class="toggle-panel" id="panel-r2-pitch"><div class="panel-inner"><div class="group"><div class="group-label">THE PITCH</div><p>One tap while scouting a neighborhood = photo + GPS address + note. Build your list of distressed houses and export it. It&#x27;s the notebook, not the database — no owner data, no skip tracing.</p></div><div class="group"><div class="group-label">MARKET CHECK</div><p>DealMachine charges $119 per seat/month and its rivals run $29–$119/mo — all subscription platforms selling owner data and skip tracing. Nobody sells the simple notebook half for beginners and part-timers who aren&#x27;t paying $1,400/year to scout.</p></div><div class="group"><div class="group-label">NOTES</div><p>Ryan is the customer — he&#x27;d dogfood it on his own drives. Start as a web app, then iOS.</p></div></div></div></div>
 </article>
-<article class="card lit" data-verdict="open_lane" data-band="in">
+<article class="card lit" id="card-3" data-verdict="open_lane" data-band="in">
 <div class="card-head"><span class="rank-badge">#3</span></div>
 <div class="aurora-bar"></div>
 <h3 class="title title-gradient">Pet Recovery Companion</h3>
@@ -195,7 +230,7 @@ footer .mono{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spaci
 <span class="t-hint">Pitch · Competition</span><span class="chev">⌄</span></button>
 <div class="toggle-panel" id="panel-r3-pitch"><div class="panel-inner"><div class="group"><div class="group-label">THE PITCH</div><p>The vet hands you a paper sheet and a cone, and you&#x27;re on your own. Set up the med schedule in a minute: dose reminders, a daily incision photo timeline you can show the vet, and a “call the vet if…” checklist.</p></div><div class="group"><div class="group-label">MARKET CHECK</div><p>The polished products in this space are sold to clinics at $29–$49/mo — owners only get in if their vet subscribes. Owner-direct, there are only a few tiny apps and no clear winner.</p></div><div class="group"><div class="group-label">NOTES</div><p>Born from Chowder&#x27;s surgery day, Nov 19. Small, finishable — and every pet owner hits this moment eventually.</p></div></div></div></div>
 </article>
-<article class="card lit" data-verdict="flooded" data-band="in">
+<article class="card lit" id="card-4" data-verdict="flooded" data-band="in">
 <div class="card-head"><span class="rank-badge">#4</span></div>
 <div class="aurora-bar red"></div>
 <h3 class="title title-gradient">19th Hole — Snap-the-Card Settler</h3>
@@ -213,7 +248,7 @@ footer .mono{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spaci
 <span class="t-hint">Pitch · Competition</span><span class="chev">⌄</span></button>
 <div class="toggle-panel" id="panel-r4-pitch"><div class="panel-inner"><div class="group"><div class="group-label">THE PITCH</div><p>Every golf betting app demands live phone scoring all round. Most casual foursomes still keep one paper card. At the 19th hole, snap a photo of it: the app reads the scores, runs your games (Nassau, skins, Wolf, junk/dots, presses), nets it down to the fewest payments, and shows who owes whom before the first beer lands. The whole product is the last five minutes of the round — no accounts, no live scoring, no subscriptions.</p></div><div class="group"><div class="group-label">MARKET CHECK</div><p>Checked 2026-11-19: golf is the most contested category we&#x27;ve tested. Bet settling alone has Settle Up Golf (free, Venmo settle, built-in handicap index), GreenBet (17 games, free, live P&amp;L), theStick (69 games + an AI assistant) and Duck Hook (32 formats) — all polished, all live-entry. Trips are just as packed: Wedge, Wire2Wire, Captain&#x27;s Pick, Bagpipe, ParTab, MATCHUPS. The one seam: every incumbent needs the group scoring on phones all round; none leads with photo-of-the-paper-card settlement. It&#x27;s a feature wedge, not a moat — any of them could copy it in a release.</p></div><div class="group"><div class="group-label">NOTES</div><p>Jon asked for a golf idea specifically, 2026-11-19. Ranked on his call with the honest chip: category flooded with free rivals; the snap-the-card entry point is the only daylight found.</p></div></div></div></div>
 </article>
-<article class="card lit" data-verdict="open_lane" data-band="in">
+<article class="card lit" id="card-5" data-verdict="open_lane" data-band="in">
 <div class="card-head"><span class="rank-badge">#5</span></div>
 <div class="aurora-bar"></div>
 <h3 class="title title-gradient">Who&#x27;s Got My Stuff</h3>
@@ -231,7 +266,7 @@ footer .mono{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spaci
 <span class="t-hint">Pitch · Competition</span><span class="chev">⌄</span></button>
 <div class="toggle-panel" id="panel-r5-pitch"><div class="panel-inner"><div class="group"><div class="group-label">THE PITCH</div><p>One ledger for everything people owe you, tangible or not: a lent tool (photo + due-back date), cash, and the things that actually slip through the cracks — the email they promised to send, the document they were going to forward, the favor they owe you. Each entry gets a person, a date, and a gentle due date; when it passes, one tap sends a polite nudge written in your voice. Two-way, too: what you owe sits in the same book, so nothing you promised quietly rots either.</p></div><div class="group"><div class="group-label">MARKET CHECK</div><p>Checked 2026-11-19: the money half is crowded — DebtMe, YouOweMe, Kredi-i, MyHutang and Listub all track IOUs, most of them free; KEEPR combines money + lent stuff but is built for India. The intangible half is the opening: follow-up tools exist for salespeople&#x27;s email, but nobody sells a personal book of everything you&#x27;re owed — items, cash, a promised email, a document, a favor. Wedge: one ledger for all of it, due dates + a polite nudge, $1.99 one-time, no account. Risk: free money-only rivals mean it wins on feel, not features.</p></div><div class="group"><div class="group-label">NOTES</div><p>Jon picked this from the second-wave five on 2026-11-19, then widened it himself the same evening: not just lent stuff and money — owed emails, documents, and favors too. That widening is the freshest part of the pitch. Verdict stays honest: money side crowded, combined-ledger lane open.</p></div></div></div></div>
 </article>
-<article class="card lit" data-verdict="flooded" data-band="in">
+<article class="card lit" id="card-6" data-verdict="flooded" data-band="in">
 <div class="card-head"><span class="rank-badge">#6</span></div>
 <div class="aurora-bar red"></div>
 <h3 class="title title-gradient">Friend Roulette</h3>
@@ -249,7 +284,7 @@ footer .mono{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spaci
 <span class="t-hint">Pitch · Competition</span><span class="chev">⌄</span></button>
 <div class="toggle-panel" id="panel-r6-pitch"><div class="panel-inner"><div class="group"><div class="group-label">THE PITCH</div><p>Everyone at the table drops their name (or face) on a customizable wheel. Spin it to settle the night&#x27;s recurring fights: who pays the bill, who buys the next round, who does the dare, who decides where you go next. Stakes modes — Pays / Next Round / Dare / Decides — saved groups for your regular crew, and a slow-down verdict moment built to be filmed for the group chat.</p></div><div class="group"><div class="group-label">MARKET CHECK</div><p>Checked 2026-11-19: the wheel mechanic is the most copied utility on the internet — the wheel-of-names sites (spinwheel.to, spinwheel.party, fastwheelspinner) are all free, and Face Spinner already does photo-face roulette plus dare wheels. The bill version exists too: Lucky Split (who-pays party game with a real bill splitter and grudge ticker), Creditorious (cinematic credit-card roulette, coming to iPhone), Cino Roulette inside a bill-splitting app. Wedge, if any: nobody packages the whole night — bill + rounds + dares + decisions — as one crew game. It wins on drama and polish or not at all.</p></div><div class="group"><div class="group-label">NOTES</div><p>Jon&#x27;s idea, 2026-11-19. Ranked on his call with the honest chip: mechanic flooded, whole-night packaging is the only open seam.</p></div></div></div></div>
 </article>
-<article class="card lit" data-verdict="open_lane" data-band="in">
+<article class="card lit" id="card-7" data-verdict="open_lane" data-band="in">
 <div class="card-head"><span class="rank-badge">#7</span></div>
 <div class="aurora-bar"></div>
 <h3 class="title title-gradient">Missing Piece</h3>
@@ -267,7 +302,7 @@ footer .mono{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spaci
 <span class="t-hint">Pitch · Competition</span><span class="chev">⌄</span></button>
 <div class="toggle-panel" id="panel-r7-pitch"><div class="panel-inner"><div class="group"><div class="group-label">THE PITCH</div><p>Every few weeks a new fast-food drop lands — Happy Meal toy sets, Halloween buckets, limited cups — and hunters fan out store to store, phones in hand, living in Facebook groups for sightings. Missing Piece is that hunt in one place, built phone-first: your set at a glance (have it / still missing / dupe to trade), a live sightings feed from the other hunters chasing the same drop (&#x27;the Montebello store had #6 an hour ago&#x27;), and a shareable trade card for the group chat. Works solo as a checklist from day one; the connected layer gets better as hunters join.</p></div><div class="group"><div class="group-label">MARKET CHECK</div><p>Checked 2026-11-19: collection ARCHIVES are flooded (every fandom has a tracker — CLZ, Funko, Bubuspace for Pop Mart), and TCG hunting has real radar apps (CCN, Guppy). But the fast-food promo hunt is served by one scrappy community website, happytoyscout.com, whose own users complain it barely loads — and by Facebook groups, which is where the sightings and trade chatter actually live today, buried in feed scroll. The demand is proven and weekly; the tooling is held together with tape. Honest risks: sightings need a crowd (cold start — though the crowd demonstrably exists, scattered across groups), and checklists depend on drop data someone has to maintain.</p></div><div class="group"><div class="group-label">NOTES</div><p>Inspired by Maria&#x27;s weekly McDonald&#x27;s hunts for the new Happy Meal toys and buckets (Jon, 2026-11-19). She&#x27;s user zero — if it doesn&#x27;t survive her Friday run, it doesn&#x27;t ship. Her real workflow today: checking Facebook groups for sightings and trades (Jon, 2026-11-19) — the behavior already exists; Missing Piece&#x27;s wedge is giving it a checklist and a map instead of a feed. Jon&#x27;s refinement (2026-11-19): the hunters are phone-in-hand, want to stay connected to each other mid-hunt, and live in the have-vs-still-missing view — those three are the product&#x27;s spine. Renamed from Drop Hunt to Missing Piece by Jon, 2026-11-19.</p></div></div></div></div>
 </article>
-<article class="card lit" data-verdict="open_lane" data-band="in">
+<article class="card lit" id="card-8" data-verdict="open_lane" data-band="in">
 <div class="card-head"><span class="rank-badge">#8</span></div>
 <div class="aurora-bar"></div>
 <h3 class="title title-gradient">Coin Coach</h3>
@@ -285,7 +320,7 @@ footer .mono{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spaci
 <span class="t-hint">Pitch · Competition</span><span class="chev">⌄</span></button>
 <div class="toggle-panel" id="panel-r8-pitch"><div class="panel-inner"><div class="group"><div class="group-label">THE PITCH</div><p>Money skills practice built for teens and adults with developmental disabilities — and bought by their parents for home, not by schools for classrooms. It starts exactly where the learner is: solid to 10, then coins become the bridge (a dime is counting by 10s you can hold). Coin recognition, counting a handful, and the independence skill that matters most — next dollar up: the snack costs $2.40, you hand over $3, every time, no exact-change math required. Real-life scenarios (vending machine, McDonald&#x27;s counter, bus fare), big calm visuals, zero childish mascots — a 20-year-old deserves a tool that looks her age. Parent view shows what&#x27;s clicking: &#x27;next dollar up: 8 of 10 this week.&#x27;</p></div><div class="group"><div class="group-label">MARKET CHECK</div><p>Checked 2026-11-19: the need is real and the pedagogy is proven (explicit instruction, realistic money, next-dollar-up is the standard method in the research). But the supply is school-channel: Attainment Company&#x27;s Dollars &amp; Cents is the incumbent — solid curriculum (counting coins, spending, making change) sold as institutional classroom software, 316MB iPad app, dated feel. Around it: Money Up! and Next Dollar Up (single-method apps), EdQueries (India, browser games), and a teacher-worksheet economy on Boom Cards/TPT. Nobody sells a modern, parent-bought, home-practice version — everything assumes a teacher and an IEP. Parents are the underserved buyers.</p></div><div class="group"><div class="group-label">NOTES</div><p>Inspired by Mira — Jon&#x27;s stepdaughter, 20, autistic, ~1st-grade level: counts to 10 easily, hard after that, struggles with money and coins (Jon, 2026-11-19). She&#x27;s the dogfood user, same pattern as Ryan for Drive-By and Maria for Drop Hunt. Bigger-version note: schools and districts pay real money in this category (Attainment proves it) — the pact version is the parent one; a school lane could exist later.</p></div></div></div></div>
 </article>
-<article class="card lit" data-verdict="open_lane" data-band="in">
+<article class="card lit" id="card-9" data-verdict="open_lane" data-band="in">
 <div class="card-head"><span class="rank-badge">#9</span></div>
 <div class="aurora-bar"></div>
 <h3 class="title title-gradient">Tutorializer</h3>
@@ -303,7 +338,7 @@ footer .mono{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spaci
 <span class="t-hint">Pitch · Competition</span><span class="chev">⌄</span></button>
 <div class="toggle-panel" id="panel-r9-pitch"><div class="panel-inner"><div class="group"><div class="group-label">THE PITCH</div><p>Name the task or question — &#x27;move my site from Divi 4 to 5,&#x27; &#x27;learn pivot tables,&#x27; &#x27;fix a running toilet&#x27; — and instead of 40 SEO-ranked tutorials, you get pointed: the one source to start with, why it&#x27;s the right one for your tool and version, and what to skip. It asks the two questions search never asks (what version are you on, what do you already know), then gives a direction, not a library. Opinionated and verified beats comprehensive and stale.</p></div><div class="group"><div class="group-label">MARKET CHECK</div><p>Checked 2026-11-19: the neighbors are all partial. roadmap.sh is huge and free but dev-careers only, static paths, not task-level. Smartic (Chrome extension) scores YouTube results for quality/version fit — closest cousin, but it&#x27;s an overlay on search, not a router. Curated GitHub lists and course platforms are static libraries. The elephant: general AI chat answers &#x27;where do I learn X&#x27; for free — but with unchecked links, no knowledge of YOUR tool version, and five options instead of one direction. Nobody does the opinionated version: task in → the one right starting source, why, what to skip, matched to your tool and version (Divi 5, not 4). Risk is real: it must be visibly more trustworthy than asking a chatbot, or it&#x27;s a feature, not a product.</p></div><div class="group"><div class="group-label">NOTES</div><p>Jon&#x27;s idea, 2026-11-19 (&#x27;Custom Tutorializer&#x27;). He lives this problem daily — his curated YouTube watch list and the whole link-review/harvest system are this exact muscle done by hand. Dogfood user: Jon himself.</p></div></div></div></div>
 </article>
-<article class="card lit" data-verdict="open_lane" data-band="in">
+<article class="card lit" id="card-10" data-verdict="open_lane" data-band="in">
 <div class="card-head"><span class="rank-badge">#10</span></div>
 <div class="aurora-bar"></div>
 <h3 class="title title-gradient">Secret Trail</h3>
@@ -321,7 +356,7 @@ footer .mono{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spaci
 <span class="t-hint">Pitch · Competition</span><span class="chev">⌄</span></button>
 <div class="toggle-panel" id="panel-r10-pitch"><div class="panel-inner"><div class="group"><div class="group-label">THE PITCH</div><p>Hide a secret where only the right person, in the right place, can open it — or chain secrets into a treasure map. Two modes: a Secret (a note, photo or video locked to a spot, unlocked on arrival — for surprises, proposals, thinking-of-you places) and a Trail (a clue-by-clue map you build in minutes for a birthday, a family reunion, a work party, or a small fundraiser). Hunters join by link or QR — no accounts, no app install. It&#x27;s the personal tier the event platforms ignore: they charge $399 an event; this is $1.99, forever, for your people.</p></div><div class="group"><div class="group-label">MARKET CHECK</div><p>Checked 2026-11-19: two halves, two stories. (1) Secret location messages are a GRAVEYARD — Traces, Drop and WallaMe all tried &#x27;leave a message that unlocks at a place&#x27; and died, mostly on the two-sided problem (your person needs the app AND must physically go). Live remnants: Explurger&#x27;s Pin Message (a feature inside a travel app) and tiny Pinveil. (2) Organized hunts are a mature B2B market: Goosechase charges $399–$1,199 per event, Actionbound ~$650 per 100 players, plus Scavify, PlayTours, ClueKeeper. The seam: those prices are corporate. A parent building a birthday treasure map, a couple planning a proposal trail, or a small fundraiser gets quoted enterprise rates or uses paper. Nobody sells the personal version for $1.99.</p></div><div class="group"><div class="group-label">NOTES</div><p>Jon&#x27;s idea, 2026-11-19 (social fun / work events / fundraisers). Card carries both warnings honestly: the secret-message half has a graveyard, and the event half has real B2B platforms — the play is strictly the personal tier they all price above.</p></div></div></div></div>
 </article>
-<article class="card lit" data-verdict="open_lane" data-band="in">
+<article class="card lit" id="card-11" data-verdict="open_lane" data-band="in">
 <div class="card-head"><span class="rank-badge">#11</span></div>
 <div class="aurora-bar"></div>
 <h3 class="title title-gradient">Set List</h3>
@@ -339,7 +374,7 @@ footer .mono{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spaci
 <span class="t-hint">Pitch · Competition</span><span class="chev">⌄</span></button>
 <div class="toggle-panel" id="panel-r11-pitch"><div class="panel-inner"><div class="group"><div class="group-label">THE PITCH</div><p>Bands have Bandsintown. Comics have chaos — dates scattered across club websites and Instagram stories that vanish in a day, so fans find out their favorite comic was in town the morning after. Set List: follow your comedians, get pinged the moment one books within driving distance, and see one at-a-glance view — who&#x27;s in town this week, this month, near you. Comedy-only, club-level, built for the fan who&#x27;s tired of hearing about it yesterday.</p></div><div class="group"><div class="group-label">MARKET CHECK</div><p>Checked 2026-11-19: BANDS are a closed shop — Bandsintown (100M fans, 700K artists) plus its partner Laylo (the artist drop/update CRM) and Seated own follow-an-artist alerts completely. COMEDY is thinner but moving: Bandsintown lists comics as a genre, Disciples of Comedy runs a passion-project comedy calendar + newsletter, and The Laugh Radar — an app doing exactly &#x27;follow comics, get alerted when they book near you&#x27; — launched THIS WEEK (Nov 2026) with a few hundred followers. So the lane is open but the window is visibly closing, the early movers are free, and the real cost is the data grind: comic dates live on club sites and 24-hour Instagram stories, and somebody has to aggregate them forever.</p></div><div class="group"><div class="group-label">NOTES</div><p>Jon&#x27;s idea, 2026-11-19 (band tracker / comedian portal / artist news at a glance). Music half killed on sight — Bandsintown + Laylo own it. Comedy half survives with the heaviest caveats on the board: a direct rival launched days ago and is free, so this wins on polish, coverage, and local depth or not at all.</p></div></div></div></div>
 </article>
-<article class="card lit" data-verdict="flooded" data-band="in">
+<article class="card lit" id="card-12" data-verdict="flooded" data-band="in">
 <div class="card-head"><span class="rank-badge">#12</span></div>
 <div class="aurora-bar red"></div>
 <h3 class="title title-gradient">Pet Derby</h3>
@@ -357,7 +392,7 @@ footer .mono{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spaci
 <span class="t-hint">Pitch · Competition</span><span class="chev">⌄</span></button>
 <div class="toggle-panel" id="panel-r12-pitch"><div class="panel-inner"><div class="group"><div class="group-label">THE PITCH</div><p>Upload your pet once. Every day, your pet races your friends&#x27; pets — a 10-second animated derby, photo-faced racers, photo finish. Winner gets the crown, the group chat gets the replay, and the season standings keep the bragging rights official. Not a global cuteness contest against strangers: a closed league of your actual friends, your actual pets, one race a day.</p></div><div class="group"><div class="group-label">MARKET CHECK</div><p>Checked 2026-11-19: pet-vs-pet is busy. Pet Royale does head-to-head cute battles with daily streaks, leaderboards and friend invites. Cat Chaos Arena runs daily themed video battles. Pet Parade runs 64-pet bracket tournaments for gift cards. KingPet is the giant — monthly photo contests, thousands of entries, cash prizes (and pay-to-win vote complaints). Prettiest Pet, TheCutest.pet and even Pet-Bling (paid 1v1 stakes) fill the rest. The one sliver nobody packages exactly: a CLOSED league — only your friends&#x27; pets, an actual animated daily race (not a photo vote), season standings. It&#x27;s a skin on a crowded mechanic, not an open field.</p></div><div class="group"><div class="group-label">NOTES</div><p>Jon&#x27;s idea, 2026-11-19. Same family as Friend Roulette: a social toy that lives or dies on the group chat adopting it. Carries the flooded chip honestly — the race-and-friends-only framing is the whole bet.</p></div></div></div></div>
 </article>
-<article class="card lit" data-verdict="flooded" data-band="in">
+<article class="card lit" id="card-13" data-verdict="flooded" data-band="in">
 <div class="card-head"><span class="rank-badge">#13</span></div>
 <div class="aurora-bar red"></div>
 <h3 class="title title-gradient">Walkies Simulator</h3>
@@ -375,7 +410,7 @@ footer .mono{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spaci
 <span class="t-hint">Pitch · Competition</span><span class="chev">⌄</span></button>
 <div class="toggle-panel" id="panel-r13-pitch"><div class="panel-inner"><div class="group"><div class="group-label">THE PITCH</div><p>Every dog game lets you be the dog. This one makes you the human at the other end of the leash: a ragdoll on a rope, dragged past the treat store, yanked sideways by squirrels three blocks away. Levels scale by dog: a sleepy pug, a husky with somewhere to be, and the final boss — a senior Chihuahua with opinions and zero mercy.</p></div><div class="group"><div class="group-label">MARKET CHECK</div><p>The dog-simulator shelf is crowded — mobile stores are stacked with dog sims, and every one of them makes you the dog. Nobody leads with the inversion: the human as the ragdoll. It&#x27;s a joke entry and knows it; the comedy is the entire product. Verdict reflects the crowded genre, not the bit.</p></div><div class="group"><div class="group-label">NOTES</div><p>Jon&#x27;s joke idea, added for fun 2026-11-19. Chowder — senior Chihuahua, strong opinions — is the canonical final boss. If it ever got built, it&#x27;d be a physics toy, not an app-brief product.</p></div></div></div></div>
 </article>
-<article class="card lit" data-verdict="open_lane" data-band="in">
+<article class="card lit" id="card-14" data-verdict="open_lane" data-band="in">
 <div class="card-head"><span class="rank-badge">#14</span></div>
 <div class="aurora-bar"></div>
 <h3 class="title title-gradient">Where&#x27;s My Pet?</h3>
@@ -393,7 +428,7 @@ footer .mono{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spaci
 <span class="t-hint">Pitch · Competition</span><span class="chev">⌄</span></button>
 <div class="toggle-panel" id="panel-r14-pitch"><div class="panel-inner"><div class="group"><div class="group-label">THE PITCH</div><p>Upload your pet once. Every day a new busy illustrated scene drops — a beach, a market, a space station — and your pet is hidden somewhere in it. Send it to friends: fastest find wins. Their pets hide in your scenes too. It&#x27;s the personalized seek-and-find book, turned into a daily game with streaks and bragging rights.</p></div><div class="group"><div class="group-label">MARKET CHECK</div><p>Checked 2026-11-19: the personalized seek-and-find exists — as gifts, not as a game. Wimmelize turns your photos (pets included) into hidden characters in an illustrated busy scene for $19 one-time, delivered as a keepsake + playable link. Sagalino and a pile of Etsy sellers sell the same idea as printed books ($12–$45), mostly for kids. Hidloo is a hiding game with friends, but you hide a generic figure in your own photo — not your pet in an illustrated world. Nobody runs it as a daily game: fresh scene every day, your pet hidden in it, friends racing the clock, pets hiding in each other&#x27;s scenes. Wimmelize&#x27;s $19 for ONE scene proves people pay for the personalization.</p></div><div class="group"><div class="group-label">NOTES</div><p>Jon&#x27;s idea, 2026-11-19. The hard part is production, not the concept: pets must be drawn INTO the scene&#x27;s art style, not pasted in as photos — the Lantern lesson. A small library of scenes with the pet rendered in-style is the whole build cost.</p></div></div></div></div>
 </article>
-<article class="card lit" data-verdict="open_lane" data-band="in">
+<article class="card lit" id="card-15" data-verdict="open_lane" data-band="in">
 <div class="card-head"><span class="rank-badge">#15</span></div>
 <div class="aurora-bar"></div>
 <h3 class="title title-gradient">Next-Flick</h3>
@@ -411,7 +446,7 @@ footer .mono{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spaci
 <span class="t-hint">Pitch · Competition</span><span class="chev">⌄</span></button>
 <div class="toggle-panel" id="panel-r15-pitch"><div class="panel-inner"><div class="group"><div class="group-label">THE PITCH</div><p>Rotten Tomatoes, but the only critics are your family and friends. Invite your circle, everyone rates and comments on what they watch, and the &#x27;what do we watch tonight&#x27; answer comes from people whose taste you actually trust — not strangers, not reviewers, not an algorithm. Private by default: there is no public feed, no follower count, no outside. Movies and shows in one place, with where-to-watch attached.</p></div><div class="group"><div class="group-label">MARKET CHECK</div><p>Checked 2026-11-19: every ingredient exists, but always as a public social network with friends bolted on. Letterboxd owns film diaries + friends (public graph). Serializd does the same for TV. Friday is the closest rival — ratings, friends feed, even a &#x27;filter by who&#x27;s on the couch&#x27; picker — but it&#x27;s an algorithm product with a public side. Pretzel Rated (&#x27;your people, your recommendations&#x27;) and I Like Movies (family watch groups, shared lists) circle the same idea. Nobody&#x27;s core product is the closed circle itself: invite-only, family-and-friends only, no public graph, no algorithm, no strangers — and decision-first (&#x27;what do WE watch tonight&#x27;) instead of diary-first. The known killer is cold start: the whole family has to join or it&#x27;s an empty room.</p></div><div class="group"><div class="group-label">NOTES</div><p>Jon&#x27;s own project — front end already built and live at next-flick.com (&#x27;Private family watchlist — What&#x27;s next? Your family decides. No algorithms, no strangers — just your private cinema circle.&#x27;). Was in Trinity&#x27;s original candidates file as a bigger play that didn&#x27;t fit the $0.99–$1.99 one-off brief; Jon brought it back himself 2026-11-19. Closest watch item: Friday — if it ships a truly private mode, the seam narrows fast.</p></div></div></div></div>
 </article>
-<article class="card lit" data-verdict="flooded" data-band="in">
+<article class="card lit" id="card-16" data-verdict="flooded" data-band="in">
 <div class="card-head"><span class="rank-badge">#16</span></div>
 <div class="aurora-bar red"></div>
 <h3 class="title title-gradient">Feisty Feline</h3>
@@ -429,7 +464,7 @@ footer .mono{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spaci
 <span class="t-hint">Pitch · Competition</span><span class="chev">⌄</span></button>
 <div class="toggle-panel" id="panel-r16-pitch"><div class="panel-inner"><div class="group"><div class="group-label">THE PITCH</div><p>A game your cat plays, not you: laser dots to chase, scratch-posts to shred, mice with somewhere to be — all pawed at on your tablet. Your job is equipment manager: hold the tablet, replace the screen protector, post the scores. The league layer makes it social — your cat vs your friends&#x27; cats, weekly high scores, season standings.</p></div><div class="group"><div class="group-label">MARKET CHECK</div><p>Tablet games for cats are a real (if sleepy) category — Friskies built the famous ones: laser dots, fish, things to paw at on screen. What nobody has built is the competitive layer: cat vs cat, high scores, season standings — a leaderboard where the athletes do not care who wins. Genre verdict is flooded for the base mechanic; the rivalry league is the joke and the only new bit.</p></div><div class="group"><div class="group-label">NOTES</div><p>Jon&#x27;s joke idea, added for fun 2026-11-19. Screen protectors are the real recurring revenue. Pairs with Walkies Simulator in the board&#x27;s comedy division.</p></div></div></div></div>
 </article>
-<article class="card lit" data-verdict="flooded" data-band="in">
+<article class="card lit" id="card-17" data-verdict="flooded" data-band="in">
 <div class="card-head"><span class="rank-badge">#17</span></div>
 <div class="aurora-bar red"></div>
 <h3 class="title title-gradient">Sample Clearance Log</h3>
@@ -447,7 +482,7 @@ footer .mono{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spaci
 <span class="t-hint">Pitch · Competition</span><span class="chev">⌄</span></button>
 <div class="toggle-panel" id="panel-r17-pitch"><div class="panel-inner"><div class="group"><div class="group-label">THE PITCH</div><p>Every producer&#x27;s catalog has a skeleton in it: a sample from a record, a pack, a friend&#x27;s track — used on a release, clearance status unknown, details in a spreadsheet or nowhere. The log: per track, every sample, its source, who owns it, clearance status, license terms, and what&#x27;s owed — so a catalog audit takes minutes instead of a panic.</p></div><div class="group"><div class="group-label">MARKET CHECK</div><p>Checked 2026-11-19: two real incumbents. Tracklib is the licensing marketplace — it clears samples you license through its own catalog, but it is not a log for your whole body of work. Cleared. (isitcleared.com) is the direct hit: an all-in-one platform to track every clearance (sample, publishing, feature, legal) in one place, with split sheets, e-signing, per-track readiness scores and an audit trail — &#x27;no more spreadsheets&#x27; is literally its pitch, and it starts free. The only sliver left is weight: a dirt-simple solo-producer log (what I sampled, from where, status, what I owe) with none of the platform machinery. Cleared.&#x27;s free tier squeezes even that.</p></div><div class="group"><div class="group-label">NOTES</div><p>From Trinity&#x27;s round-2 unchecked list; Jon picked it up himself 2026-11-19 (&#x27;I like the sample clearances idea too&#x27;). Jon is the dogfood user — a working producer with a catalog is exactly who feels this pain. Carries the flooded chip honestly: the pro version exists and starts free.</p></div></div></div></div>
 </article>
-<article class="card lit" data-verdict="open_lane" data-band="in">
+<article class="card lit" id="card-18" data-verdict="open_lane" data-band="in">
 <div class="card-head"><span class="rank-badge">#18</span></div>
 <div class="aurora-bar"></div>
 <h3 class="title title-gradient">PRD Maker</h3>
@@ -465,7 +500,7 @@ footer .mono{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spaci
 <span class="t-hint">Pitch · Competition</span><span class="chev">⌄</span></button>
 <div class="toggle-panel" id="panel-r18-pitch"><div class="panel-inner"><div class="group"><div class="group-label">THE PITCH</div><p>You bring a rough idea. The app interviews you — users, problem, scope, pricing, risks, the questions you haven&#x27;t thought of — one topic at a time, skipping what you don&#x27;t know yet and parking it as an open question. Out comes a complete, organized PRD. Then it keeps going where the generators stop: a design-and-build process laid out as stages, a catalog holding every product and its documents, and a review board where the plan gets read, graded, and sent back with verdicts before a line gets built. It&#x27;s the desk system a solo builder with AI tools actually works in — productized.</p></div><div class="group"><div class="group-label">MARKET CHECK</div><p>Checked 2026-11-19: the drafting step has a real leader — ChatPRD (100K+ users, AI copilot for PMs: templates, clarifying questions, gap analysis, exports everywhere). Around it: PRDKit (conversational, exports to Bolt/Lovable), Productboard Spark, Notion AI templates, Atlassian Rovo, Specky — all aimed at PM teams inside companies. The tell, from a November 2026 comparison of requirements tools: ChatPRD&#x27;s job &#x27;ends at the document&#x27; — no build process, no catalog, no review board. The interview pattern itself also exists as free prompts and Claude skills for vibe coders, which caps the drafting step&#x27;s value. Nobody sells the whole chain for solo builders: interview, PRD, feasibility and open questions, a review board with graded verdicts, build tracking, and a catalog of every product&#x27;s documents. The risk is scope: this is the biggest build on the board, and ChatPRD is free to start.</p></div><div class="group"><div class="group-label">NOTES</div><p>Jon&#x27;s idea, 2026-11-19. He is the dogfood user at scale: the Lantern PRD, the feasibility pass, the specialist review desks, the bridge catalog — this board itself — are this product done by hand. If it ever gets built, its spec is his existing workflow, written down.</p></div></div></div></div>
 </article></main>
-<main id="shelvedList" class="hidden"><article class="card lit" data-verdict="flooded" data-band="out">
+<main id="shelvedList" class="grid hidden"><article class="card lit" data-verdict="flooded" data-band="out">
 <div class="card-head"><span class="rank-badge red">KILLED</span></div>
 <div class="aurora-bar muted"></div>
 <h3 class="title title-gradient">Poker Home-Game Kit</h3>
@@ -545,18 +580,29 @@ function segWire(id,attr,fn){
 }
 var curV='all',curB='all';
 function applyFilters(){
-  document.querySelectorAll('#rankedList .card').forEach(function(c){
+  document.querySelectorAll('#rankedList .card, #ladder .ladder-row').forEach(function(c){
     var okV=curV==='all'||c.getAttribute('data-verdict')===curV;
     var okB=curB==='all'||c.getAttribute('data-band')===curB;
     c.style.display=(okV&&okB)?'':'none';
   });
 }
+document.querySelectorAll('.ladder-row').forEach(function(row){
+  row.addEventListener('click',function(e){
+    e.preventDefault();
+    var target=document.querySelector(row.getAttribute('href'));
+    if(!target) return;
+    target.scrollIntoView({behavior:'smooth',block:'center'});
+    target.classList.remove('flash'); void target.offsetWidth; target.classList.add('flash');
+  });
+});
 segWire('verdictSeg','data-v',function(v){curV=v;applyFilters();});
 segWire('bandSeg','data-b',function(b){curB=b;applyFilters();});
 segWire('viewSeg','data-view',function(v){
   document.getElementById('rankedList').classList.toggle('hidden',v!=='ranked');
   document.getElementById('shelvedList').classList.toggle('hidden',v!=='shelved');
   document.getElementById('filters').style.display=v==='ranked'?'':'none';
+  document.getElementById('ladder').style.display=v==='ranked'?'':'none';
+  document.getElementById('ladderHead').style.display=v==='ranked'?'':'none';
 });
 </script>
 </body></html>
