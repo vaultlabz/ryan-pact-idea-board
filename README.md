@@ -21,7 +21,8 @@ Full-page screenshot: [media/full-page.jpg](media/full-page.jpg)
 A read-only public snapshot of the live idea board Jon keeps in Muse (snapshot: November 19, 2026):
 
 - **18 ranked ideas**, each market-checked before it earned its rank — with The Brief (What / Why / How in plain English), the full pitch, and the market check on every card
-- **Top 3** spotlight row, verdict + price-fit filters, and a Parked & Killed view
+- **The Ladder** — all 18 at a glance with verdict dots and prices; tap a row to jump to its card
+- **Top 3** spotlight row, a 3-column grid wall, verdict + price-fit filters, and a Parked & Killed view
 - Honest verdicts throughout: gap verified, open lane, or flooded — the flooded ones carry the chip
 
 ## Design language
